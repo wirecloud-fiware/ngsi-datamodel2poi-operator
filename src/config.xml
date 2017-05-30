@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<operator xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="ngsi-datamodel2poi" version="1.0.0a2">
+  <details>
+    <title>FIWARE data model To PoI</title>
+    <homepage>https://github.com/wirecloud-fiware/ngsi-datamodel2poi-operator</homepage>
+    <authors>aarranz</authors>
+    <email>aarranz@conwet.com</email>
+    <image>images/catalogue.png</image>
+    <description>Convert NGSI entities using any of the available FIWARE data models into Point of Interests (usable by map widgets).</description>
+    <longdescription>DESCRIPTION.md</longdescription>
+    <license>Apache License 2.0</license>
+    <licenseurl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseurl>
+    <doc>doc/index.md</doc>
+    <changelog>doc/changelog.md</changelog>
+    <issuetracker>https://github.com/wirecloud-fiware/ngsi-datamodel2poi-operator/issues</issuetracker>
+  </details>
+
+  <wiring>
+    <outputendpoint name="poiOutput" type="text" label="PoI" description="Transformed Point of Interest from the received entity" friendcode="poi"/>
+    <outputendpoint name="removepoi" type="text" label="Deletions" description="Delete envents" friendcode="poi"/>
+    <inputendpoint name="entityInput" type="text" label="Entity" description="Received entity will be transform to a PoI" friendcode="entity"/>
+  </wiring>
+
+  <scripts>
+    <script src="lib/js/moment-with-locales.min.js"/>
+    <script src="js/main.js"/>
+  </scripts>
+</operator>
