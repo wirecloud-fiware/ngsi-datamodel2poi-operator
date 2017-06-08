@@ -224,6 +224,86 @@
         return infoWindow;
     };
 
+    var renderOnStreetParking = function renderOnStreetParking(entity, coordinates) {
+        var icon, level, style;
+
+        if (!('availableSpotNumber' in entity)) {
+            level = "unknown";
+            style = {
+                fill: "rgba(51, 51, 51, 0.1)",
+                stroke: "#333333"
+            };
+        } else if (entity.availableSpotNumber <= 5) {
+            level = "veryhigh";
+            style = {
+                fill: "rgba(150, 0, 24, 0.3)",
+                stroke: "rgba(150, 0, 24, 0.9)"
+            };
+        } else if (entity.availableSpotNumber <= 10) {
+            level = "high";
+            style = {
+                fill: "rgba(242, 147, 5, 0.3)",
+                stroke: "rgba(242, 147, 5, 0.9)"
+            };
+        } else if (entity.availableSpotNumber <= 20) {
+            level = "moderate";
+            style = {
+                fill: "rgba(238, 194, 11, 0.3)",
+                stroke: "rgba(238, 194, 11, 0.9)"
+            };
+        } else if (entity.availableSpotNumber <= 40) {
+            level = "low";
+            style = {
+                fill: "rgba(121, 188, 106, 0.3)",
+                stroke: "rgb(99, 112, 30)"
+            };
+        } else {
+            level = "verylow";
+            style = {
+                fill: "rgba(121, 188, 106, 0.3)",
+                stroke: "rgb(99, 112, 30)"
+            };
+        }
+        icon = {
+            anchor: [0.5, 1],
+            scale: 0.4,
+            src: internalUrl('images/parking/' + level + '.png')
+        };
+        var poi = {
+            id: entity.id,
+            icon: icon,
+            tooltip: entity.id,
+            data: entity,
+            title: entity.name,
+            infoWindow: buildOnStreetParkingInfoWindow.call(this, entity),
+            currentLocation: coordinates,
+            location: entity.location,
+            style: style
+        };
+
+        return poi;
+    };
+
+    var buildOnStreetParkingInfoWindow = function buildOnStreetParkingInfoWindow(entity) {
+        var infoWindow = "<div>";
+
+        if (entity.description != null) {
+            infoWindow += '<p>' + entity.description + '</p>';
+        }
+        var  date  = moment(entity.dateModified, null, MashupPlatform.context.get('language')).format('llll');
+        infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+
+        if (entity.availableSpotNumber != null && entity.totalSpotNumber != null) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> ' + entity.availableSpotNumber + ' available parking spots of ' + entity.totalSpotNumber + '</p>';
+        } else if (entity.availableSpotNumber) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> ' + entity.availableSpotNumber + ' available parking spots</p>';
+        }
+
+        infoWindow += "</div>";
+
+        return infoWindow;
+    };
+
     var renderPointOfInterest = function renderPointOfInterest(entity, coordinates) {
         var icon = {
             anchor: [0.5, 1],
@@ -291,6 +371,7 @@
     var builders = {
         "AirQualityObserved": renderAirQualityObserved,
         "OffStreetParking": renderOffStreetParking,
+        "OnStreetParking": renderOnStreetParking,
         "PointOfInterest": renderPointOfInterest,
         "WeatherObserved": renderWeatherObserved
     };
