@@ -129,7 +129,7 @@
     var buildAirQualityObservedInfoWindow = function buildAirQualityObservedInfoWindow(entity) {
         var infoWindow = "<div>";
 
-        var date  = moment(entity.dateObserved, null, MashupPlatform.context.get('language')).format('llll');
+        var date = moment(entity.dateObserved, null, MashupPlatform.context.get('language')).format('llll');
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
         infoWindow += '<p><b><i class="fa fa-fw fa-feed"/> Source: </b> ' + entity.source +  "</p>";
         var measures = '<p><b><i class="fa fa-fw fa-list-ul"/> Measures</b>:</p><ul>';
@@ -210,7 +210,7 @@
         if (entity.description != null) {
             infoWindow += '<p>' + entity.description + '</p>';
         }
-        var  date  = moment(entity.dateModified, null, MashupPlatform.context.get('language')).format('llll');
+        var date = moment(entity.dateModified, null, MashupPlatform.context.get('language')).format('llll');
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
 
         if (entity.availableSpotNumber != null && entity.totalSpotNumber != null) {
@@ -233,25 +233,25 @@
                 fill: "rgba(51, 51, 51, 0.1)",
                 stroke: "#333333"
             };
-        } else if (entity.availableSpotNumber <= 5) {
+        } else if (entity.availableSpotNumber == 0) {
             level = "veryhigh";
             style = {
                 fill: "rgba(150, 0, 24, 0.3)",
                 stroke: "rgba(150, 0, 24, 0.9)"
             };
-        } else if (entity.availableSpotNumber <= 10) {
+        } else if (entity.availableSpotNumber < 2) {
             level = "high";
             style = {
                 fill: "rgba(242, 147, 5, 0.3)",
                 stroke: "rgba(242, 147, 5, 0.9)"
             };
-        } else if (entity.availableSpotNumber <= 20) {
+        } else if (entity.availableSpotNumber <= 5) {
             level = "moderate";
             style = {
                 fill: "rgba(238, 194, 11, 0.3)",
                 stroke: "rgba(238, 194, 11, 0.9)"
             };
-        } else if (entity.availableSpotNumber <= 40) {
+        } else if (entity.availableSpotNumber <= 10) {
             level = "low";
             style = {
                 fill: "rgba(121, 188, 106, 0.3)",
@@ -290,7 +290,7 @@
         if (entity.description != null) {
             infoWindow += '<p>' + entity.description + '</p>';
         }
-        var  date  = moment(entity.dateModified, null, MashupPlatform.context.get('language')).format('llll');
+        var date = moment(entity.dateModified, null, MashupPlatform.context.get('language')).format('llll');
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
 
         if (entity.availableSpotNumber != null && entity.totalSpotNumber != null) {
@@ -331,7 +331,45 @@
             infoWindow += '<p>' + entity.description + '</p>';
         }
 
-        var  date  = moment(entity.dateModified, null, MashupPlatform.context.get('language')).format('llll');
+        var date = moment(entity.dateModified, null, MashupPlatform.context.get('language')).format('llll');
+        infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        infoWindow += "</div>";
+
+        return infoWindow;
+    };
+
+    var renderWeatherForecast = function renderWeatherForecast(entity, coordinates) {
+        var icon = {
+            anchor: [0.5, 0.5],
+            scale: 0.5,
+            src: internalUrl('images/weather/' + entity.weatherType.replace(/ /g, '') + '.png')
+        };
+
+        var title;
+        if (entity.address != null && entity.address.addressLocality && entity.address.addressProvince) {
+            title = entity.address.addressLocality + '(' + entity.address.addressProvince + ')';
+        } else if (entity.address != null && entity.address.addressLocality) {
+            title = entity.address.addressLocality;
+        }
+
+        var poi = {
+            id: entity.id,
+            icon: icon,
+            tooltip: entity.id,
+            data: entity,
+            title: title,
+            infoWindow: buildWeatherForecastInfoWindow.call(this, entity),
+            currentLocation: coordinates,
+            location: entity.location
+        };
+
+        return poi;
+    };
+
+    var buildWeatherForecastInfoWindow = function buildOffStreetParkingInfoWindow(entity) {
+        var infoWindow = "<div>";
+
+        var date = moment(entity.dateObserved, null, MashupPlatform.context.get('language')).format('llll');
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
         infoWindow += "</div>";
 
@@ -340,9 +378,9 @@
 
     var renderWeatherObserved = function renderWeatherObserved(entity, coordinates) {
         var icon = {
-            anchor: [0.5, 1],
-            scale: 0.4,
-            src: internalUrl('images/weather/' + entity.category + '.png')
+            anchor: [0.5, 0.5],
+            scale: 0.5,
+            src: internalUrl('images/weather/' + entity.weatherType.replace(/ /g, '') + '.png')
         };
         var poi = {
             id: entity.id,
@@ -361,7 +399,7 @@
     var buildWeatherObservedInfoWindow = function buildOffStreetParkingInfoWindow(entity) {
         var infoWindow = "<div>";
 
-        var  date  = moment(entity.dateObserved, null, MashupPlatform.context.get('language')).format('llll');
+        var date = moment(entity.dateObserved, null, MashupPlatform.context.get('language')).format('llll');
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
         infoWindow += "</div>";
 
@@ -373,6 +411,7 @@
         "OffStreetParking": renderOffStreetParking,
         "OnStreetParking": renderOnStreetParking,
         "PointOfInterest": renderPointOfInterest,
+        "WeatherForecast": renderWeatherForecast,
         "WeatherObserved": renderWeatherObserved
     };
 
