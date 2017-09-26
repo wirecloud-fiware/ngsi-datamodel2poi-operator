@@ -870,6 +870,65 @@
         return infoWindow;
     };
 
+    var renderStreetlightControlCabinet = function renderStreetlightControlCabinet(entity,coordinates) {
+        var iconSrc;
+        iconSrc = internalUrl('images/streetlight/cabinet.png');
+
+        var icon = {
+            anchor: [0.5, 1],
+            scale: 0.4,
+            src: iconSrc
+        };
+        var poi = {
+            id: entity.id,
+            icon: icon,
+            tooltip: entity.id,
+            data: entity,
+            title: entity.areaServed,
+            infoWindow: buildStreetlightControlCabinetWindow.call(this, entity),
+            currentLocation: coordinates,
+            location: entity.location
+        };
+
+        return poi;
+    };
+
+    var buildStreetlightControlCabinetWindow = function buildStreetlightControlCabinetWindow(entity) {
+        var infoWindow = "<div>";
+
+        if (entity.description != null) {
+            infoWindow += '<p>' + entity.description + '</p>';
+        }
+
+        if (entity.energyConsumed || entity.lastMeterReading) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> Energy consumed: ' + entity.energyConsumed || entity.lastMeterReading + ' kW</p>';
+        }
+
+        if (entity.intensity) {
+            var intensity = '<p><b><i class="fa fa-fw fa-list-ul"/> Intensity</b>:</p><ul>';
+
+            Object.keys(entity.intensity).forEach((key) => {
+                intensity += '  <li><b>' + key + ': </b>' + entity.intensity[key] + '</li>';
+            });
+            intensity += '</ul>';
+            infoWindow += intensity;
+        }
+
+        if (entity.reactivePower) {
+            var power = '<p><b><i class="fa fa-fw fa-list-ul"/> Intensity</b>:</p><ul>';
+
+            Object.keys(entity.reactivePower).forEach((key) => {
+                power += '  <li><b>' + key + ': </b>' + entity.reactivePower[key] + '</li>';
+            });
+            power += '</ul>';
+            infoWindow += power;
+        }
+
+        infoWindow += "</div>";
+
+        return infoWindow;
+    };
+
     var renderWasteContainer = function renderWasteContainer(entity, coordinates) {
         var iconSrc;
 
@@ -1145,17 +1204,20 @@
 
         "OffStreetParking": renderOffStreetParking,
         "OnStreetParking": renderOnStreetParking,
-        
+
         "WeatherForecast": renderWeatherForecast,
-        "WeatherObserved": renderWeatherObserved
+        "WeatherObserved": renderWeatherObserved,
 
         "PointOfInterest": renderPointOfInterest,
         "Beach": renderBeach,
         "Museum": renderMuseum,
 
         "Device": renderDevice,
+
         "Streetlight": renderStreetlight,
         "StreetlightGroup": renderStreetlightGroup,
+        "StreetlightControlCabinet": renderStreetlightControlCabinet,
+
         "WasteContainer": renderWasteContainer,
         "WasteContainerIsle": renderWasteContainerIsle,
         "Open311:ServiceRequest": renderServiceRequest,
