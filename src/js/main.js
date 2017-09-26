@@ -1197,6 +1197,55 @@
         return infoWindow;
     };
 
+    var renderBikeHireDockingStation = function renderBikeHireDockingStation(entity, coordinates) {
+        var icon;
+        icon = {
+            anchor: [0.5, 1],
+            scale: 0.4,
+            src: internalUrl('images/bikestation/icon.png')
+        };
+        var poi = {
+            id: entity.id,
+            icon: icon,
+            tooltip: entity.id,
+            data: entity,
+            title: entity.name,
+            infoWindow: buildBikeHireDockingStationWindow.call(this, entity),
+            currentLocation: coordinates,
+            location: entity.location
+        };
+
+        return poi;
+    };
+
+    var buildBikeHireDockingStationWindow = function buildBikeHireDockingStationWindow(entity) {
+        var infoWindow = "<div>";
+
+        if (entity.description != null) {
+            infoWindow += '<p>' + entity.description + '</p>';
+        }
+
+        if (entity.status) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Status:</b> ' + entity.status + '</p>';
+        }
+
+        if (entity.availableBikeNumber) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Availabel bikes:</b> ' + entity.availableBikeNumber + '</p>';
+        }
+
+        if (entity.freeSlotNumber) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Free slots:</b> ' + entity.freeSlotNumber + '</p>';
+        }
+
+        if (entity.openingHours) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Open hours:</b> ' + entity.openingHours + '</p>';
+        }
+
+        infoWindow += "</div>";
+
+        return infoWindow;
+    };
+
     var builders = {
         "AirQualityObserved": renderAirQualityObserved,
         "WaterQualityObserved": renderWaterQualityObserved,
@@ -1224,7 +1273,8 @@
 
         "Garden": renderGarden,
 
-        "Vehicle": renderVehicle
+        "Vehicle": renderVehicle,
+        "BikeHireDockingStation": renderBikeHireDockingStation
     };
 
 })();
