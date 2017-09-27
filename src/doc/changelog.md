@@ -1,3 +1,26 @@
+3.0.4
+=====
+
+* Added support for the following FiWare data models:
+   - WaterQualityObserved.
+   - NoiseLevelObserved.
+   - Beach.
+   - Museum.
+   - Device.
+   - Streetlight.
+   - StreetlightGroup.
+   - StreetlightControlCabinet
+   - WasteContainer.
+   - WasteContainerIsle.
+   - Open311:ServiceRequest.
+   - Garden.
+   - Vehicle.
+   - BikeHireDockingStation.
+* Added weatherObserved data display.
+* Fixed units not displaying correctly.
+* Added date interval support.
+* Improved documentation.
+
 3.0.3
 =====
 
