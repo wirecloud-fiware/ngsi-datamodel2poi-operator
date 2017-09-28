@@ -1230,11 +1230,16 @@
         }
 
         if (entity.availableBikeNumber) {
-            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Availabel bikes:</b> ' + entity.availableBikeNumber + '</p>';
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Available bikes:</b> ' + entity.availableBikeNumber + '</p>';
         }
 
         if (entity.freeSlotNumber) {
-            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Free slots:</b> ' + entity.freeSlotNumber + '</p>';
+            var extraInfo = "";
+            if (entity.totalSlotNumber) {
+                extraInfo = "/" + entity.totalSlotNumber;
+            }
+
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Free slots:</b> ' + entity.freeSlotNumber + extraInfo + '</p>';
         }
 
         if (entity.openingHours) {
