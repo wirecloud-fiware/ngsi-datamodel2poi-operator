@@ -23,4 +23,4 @@ This operator has no settings.
 
 ## Usage
 
-In order to use this operator, plug a source of NGSI entities to the operator input, and connect the output to a map viewer widget (like the )
+In order to use this operator, plug a source of NGSI entities (like the [ngsi-source-operator](https://github.com/wirecloud-fiware/ngsi-source-operator)) to the operator input, and connect the output to a map viewer widget (like the [ol3-map-widget](https://github.com/Wirecloud/ol3-map-widget)).
