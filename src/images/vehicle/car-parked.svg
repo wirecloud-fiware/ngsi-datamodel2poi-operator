@@ -13,10 +13,10 @@
    width="71"
    height="82"
    id="svg5325"
-   sodipodi:docname="onRoute.svg"
-   inkscape:export-filename="verylow.png"
-   inkscape:export-xdpi="143.32394"
-   inkscape:export-ydpi="143.32394"
+   sodipodi:docname="car-parked.svg"
+   inkscape:export-filename="car-parked.png"
+   inkscape:export-xdpi="134.3662"
+   inkscape:export-ydpi="134.3662"
    inkscape:version="0.91 r13725">
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -36,9 +36,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="1.8437501"
-     inkscape:cx="283.98304"
-     inkscape:cy="14.599251"
+     inkscape:zoom="2.6074563"
+     inkscape:cx="-157.97474"
+     inkscape:cy="65.766131"
      inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -203,14 +203,14 @@
     </filter>
   </defs>
   <path
-     style="fill:#3952a3;fill-opacity:1;stroke:#333333;stroke-width:2.09588695;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter6193)"
+     style="fill:#f29305;fill-opacity:1;stroke:#333333;stroke-width:2.09588695;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter6193)"
      d="m 151.07706,159.20895 c 0,13.5045 -24.45206,33.53419 -24.45206,33.53419 0,0 -24.45206,-20.02969 -24.45206,-33.53419 0,-13.5045 10.94756,-24.45206 24.45206,-24.45206 13.5045,0 24.45206,10.94756 24.45206,24.45206 z"
      id="circle5287"
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="scsss"
      transform="matrix(0.93294792,0,0,0.93294792,8.4904676,10.979762)" />
   <g
-     transform="matrix(0.03523205,0,0,0.03523205,109.26796,138.92882)"
+     transform="matrix(0.03523205,0,0,0.03523205,108.84831,137.47775)"
      id="g3515"
      style="fill:#ffffff">
     <path
