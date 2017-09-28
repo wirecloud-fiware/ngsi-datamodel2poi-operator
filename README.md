@@ -4,7 +4,7 @@ The *NGSI datamodel 2 PoI* operator is useful for formating entities using
 any of the [FIWARE Data Models](https://schema.fiware.org) to be displayed
 inside any of the map widgets available for WireCloud.
 
-## Build
+## Build
 
 Be sure to have installed [Node.js](http://node.js). For example, you can install it on Ubuntu and Debian running the following commands:
 
