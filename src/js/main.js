@@ -345,7 +345,7 @@
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
 
         if (entity.availableSpotNumber != null && entity.totalSpotNumber != null) {
-            infoWindow += '<p><i class="fa fa-fw fa-info"/> ' + entity.availableSpotNumber + ' available parking spots of ' + entity.totalSpotNumber + '</p>';
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> ' + entity.availableSpotNumber + ' available parking spots out of ' + entity.totalSpotNumber + '</p>';
         } else if (entity.availableSpotNumber) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> ' + entity.availableSpotNumber + ' available parking spots</p>';
         }
@@ -425,7 +425,7 @@
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
 
         if (entity.availableSpotNumber != null && entity.totalSpotNumber != null) {
-            infoWindow += '<p><i class="fa fa-fw fa-info"/> ' + entity.availableSpotNumber + ' available parking spots of ' + entity.totalSpotNumber + '</p>';
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> ' + entity.availableSpotNumber + ' available parking spots out of ' + entity.totalSpotNumber + '</p>';
         } else if (entity.availableSpotNumber) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> ' + entity.availableSpotNumber + ' available parking spots</p>';
         }

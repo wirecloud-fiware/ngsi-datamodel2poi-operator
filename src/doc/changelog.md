@@ -1,5 +1,12 @@
-3.0.4
-=====
+## v3.0.5 (2017-09-29)
+
+* Improved Vehicle model: Use a different icon depending on the vehicle.
+* Improve BikeHireDockingStation data popup.
+* Improved documentation.
+
+## v3.0.4 (2017-09-28)
+
+Initial version
 
 * Added support for the following FiWare data models:
    - WaterQualityObserved.
@@ -20,19 +27,3 @@
 * Fixed units not displaying correctly.
 * Added date interval support.
 * Improved documentation.
-
-3.0.3
-=====
-
-* Initial documentation of the operator.
-* Support for custom marker icons (added a new setting for this purpose).
-
-3.0
-===
-
-* Added support for entities using two attributes for the coordinates instead of the usual pattern of using one attribute for storing both the latitude and longitude.
-
-2.99
-====
-
-Initial version
