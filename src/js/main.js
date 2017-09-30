@@ -478,7 +478,7 @@
 
         var title;
         if (entity.address != null && entity.address.addressLocality && entity.address.addressProvince) {
-            title = entity.address.addressLocality + '(' + entity.address.addressProvince + ')';
+            title = entity.address.addressLocality + ' (' + entity.address.addressProvince + ')';
         } else if (entity.address != null && entity.address.addressLocality) {
             title = entity.address.addressLocality;
         }
@@ -497,11 +497,32 @@
         return poi;
     };
 
-    var buildWeatherForecastInfoWindow = function buildOffStreetParkingInfoWindow(entity) {
+    var buildWeatherForecastInfoWindow = function buildWeatherForecastInfoWindow(entity) {
         var infoWindow = "<div>";
 
         var date = moment(entity.dateObserved, null, MashupPlatform.context.get('language')).format('llll');
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+
+        if (entity.temperature) {
+            infoWindow += '<p><i class="fa fa-fw fa-thermometer-half"/> <b>Temperature:</b> ' + entity.temperature + 'ºC</p>';
+        }
+
+        if (entity.feelsLikeTemperature) {
+            infoWindow += '<p><i class="fa fa-fw fa-thermometer-half"/> <b>Feels Like:</b> ' + entity.temperature + 'ºC</p>';
+        }
+
+        if (entity.relativeHumidity) {
+            infoWindow += '<p><i class="fa fa-fw fa-tint"/> <b>Humidity:</b> ' + entity.relativeHumidity * 100 + '%</p>';
+        }
+
+        if (entity.windSpeed) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Wind speed:</b> ' + entity.windSpeed + 'm/s</p>';
+        }
+
+        if (entity.windDirection) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Wind direction:</b> ' + entity.windDirection + 'º</p>';
+        }
+
         infoWindow += "</div>";
 
         return infoWindow;
@@ -675,7 +696,7 @@
         return poi;
     };
 
-    var buildWeatherObservedInfoWindow = function buildOffStreetParkingInfoWindow(entity) {
+    var buildWeatherObservedInfoWindow = function buildWeatherObservedInfoWindow(entity) {
         var infoWindow = "<div>";
 
         var date = displayDate(entity.dateObserved);
@@ -689,7 +710,7 @@
         }
 
         if (entity.temperature) {
-            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Temperature:</b> ' + entity.temperature + 'ºC</p>';
+            infoWindow += '<p><i class="fa fa-fw fa-thermometer-half"/> <b>Temperature:</b> ' + entity.temperature + 'ºC</p>';
         }
 
         if (entity.precipitation) {
