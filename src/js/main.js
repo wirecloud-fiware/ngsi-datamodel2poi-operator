@@ -833,7 +833,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.areaServed,
+            title: entity.areaServed || entity.id,
             infoWindow: buildStreetlightWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -857,8 +857,16 @@
         }
         infoWindow += '<p><i class="fa fa-fw fa-info"/> Street light status: ' + status + '</p>';
 
+        if (entity.locationCategory != null) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> Location: ' + entity.locationCategory + '</p>';
+        }
+
         if (entity.lanternHeight != null) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> Height: ' + entity.lanternHeight + 'm </p>';
+        }
+
+        if (entity.illuminanceLevel != null) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> Illuminance level: ' + entity.illuminanceLevel + '/1</p>';
         }
 
         infoWindow += "</div>";
@@ -884,7 +892,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.areaServed,
+            title: entity.areaServed || entity.id,
             infoWindow: buildStreetlightGroupWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -909,8 +917,12 @@
 
         infoWindow += '<p><i class="fa fa-fw fa-info"/> Street light status: ' + status + '</p>';
 
-        if (entity.lanternHeight != null) {
-            infoWindow += '<p><i class="fa fa-fw fa-info"/> Height: ' + entity.lanternHeight + 'm </p>';
+        if (entity.switchingMode != null) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> Switching mode: ' + entity.switchingMode.join(", ") + '</p>';
+        }
+
+        if (entity.illuminanceLevel != null) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> Illuminance level: ' + entity.illuminanceLevel + '/1</p>';
         }
 
         infoWindow += "</div>";
