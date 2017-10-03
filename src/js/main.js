@@ -158,12 +158,19 @@
     };
 
     var renderWaterQualityObserved = function renderWaterQualityObserved(entity, coordinates) {
-        var icon;
+        var icon, status;
+
+        // Check oxygen and pH levels for water statusw
+        if ((entity.O2 && (entity.O2 < 4.0 || entity.O2 > 12.0)) || entity.pH && (entity.pH < 6.5 || entity.ph > 9.0)) {
+            status = "bad";
+        } else {
+            status = "good";
+        }
 
         icon = {
             anchor: [0.5, 1],
             scale: 0.4,
-            src: internalUrl('images/waterquality/water.png')
+            src: internalUrl('images/waterquality/' + status + '.png')
         };
 
         var poi = {

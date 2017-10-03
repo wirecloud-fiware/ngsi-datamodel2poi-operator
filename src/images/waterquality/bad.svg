@@ -13,10 +13,10 @@
    width="71"
    height="82"
    id="svg5325"
-   sodipodi:docname="water.svg"
-   inkscape:export-filename="water.png"
-   inkscape:export-xdpi="130.68494"
-   inkscape:export-ydpi="130.68494"
+   sodipodi:docname="bad.svg"
+   inkscape:export-filename="bad.png"
+   inkscape:export-xdpi="134.3662"
+   inkscape:export-ydpi="134.3662"
    inkscape:version="0.91 r13725">
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -36,9 +36,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="1.8437501"
-     inkscape:cx="123.66405"
-     inkscape:cy="-80.197294"
+     inkscape:zoom="2.6074563"
+     inkscape:cx="-111.88728"
+     inkscape:cy="-59.812826"
      inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -203,14 +203,14 @@
     </filter>
   </defs>
   <path
-     style="fill:#3952a3;fill-opacity:1;stroke:#333333;stroke-width:2.09588695;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter6193)"
+     style="fill:#f29305;fill-opacity:1;stroke:#333333;stroke-width:2.09588695;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter6193)"
      d="m 151.07706,159.20895 c 0,13.5045 -24.45206,33.53419 -24.45206,33.53419 0,0 -24.45206,-20.02969 -24.45206,-33.53419 0,-13.5045 10.94756,-24.45206 24.45206,-24.45206 13.5045,0 24.45206,10.94756 24.45206,24.45206 z"
      id="circle5287"
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="scsss"
      transform="matrix(0.93294792,0,0,0.93294792,8.4904676,10.979762)" />
   <g
-     transform="matrix(2.5805084,0,0,2.5805084,110.82203,144.84747)"
+     transform="matrix(2.5805084,0,0,2.5805084,111.26716,143.06237)"
      id="g3892"
      style="fill:#ffffff">
     <path
