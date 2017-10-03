@@ -477,10 +477,18 @@
     };
 
     var renderWeatherForecast = function renderWeatherForecast(entity, coordinates) {
+        var type;
+
+        if (entity.weatherType) {
+            type = entity.weatherType.replace(/ /g, '');
+        } else {
+            type = "weather";
+        }
+
         var icon = {
             anchor: [0.5, 0.5],
             scale: 0.5,
-            src: internalUrl('images/weather/' + entity.weatherType.replace(/ /g, '') + '.png')
+            src: internalUrl('images/weather/' + type + '.png')
         };
 
         var title;
@@ -684,10 +692,18 @@
     };
 
     var renderWeatherObserved = function renderWeatherObserved(entity, coordinates) {
+        var type;
+
+        if (entity.weatherType) {
+            type = entity.weatherType.replace(/ /g, '');
+        } else {
+            type = "weather";
+        }
+
         var icon = {
             anchor: [0.5, 0.5],
             scale: 0.5,
-            src: internalUrl('images/weather/' + entity.weatherType.replace(/ /g, '') + '.png')
+            src: internalUrl('images/weather/' + type + '.png')
         };
         var poi = {
             id: entity.id,
