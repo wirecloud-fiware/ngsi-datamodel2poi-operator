@@ -538,6 +538,10 @@
             infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Wind direction:</b> ' + entity.windDirection + 'º</p>';
         }
 
+        if (entity.precipitationProbability) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Precipitation probability:</b> ' + entity.precipitationProbability * 100 + '%</p>';
+        }
+
         infoWindow += "</div>";
 
         return infoWindow;
