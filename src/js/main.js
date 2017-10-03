@@ -523,7 +523,7 @@
         }
 
         if (entity.feelsLikeTemperature) {
-            infoWindow += '<p><i class="fa fa-fw fa-thermometer-half"/> <b>Feels Like:</b> ' + entity.temperature + 'ºC</p>';
+            infoWindow += '<p><i class="fa fa-fw fa-thermometer-half"/> <b>Feels Like:</b> ' + entity.feelsLikeTemperature + 'ºC</p>';
         }
 
         if (entity.relativeHumidity) {
