@@ -1245,12 +1245,29 @@
         return infoWindow;
     };
 
+    // Status priority list
+    var availableBikeStatus = ["outOfService", "withIncidence", "full", "almostFull"]; // Working is default one, so no need to have it here
+
     var renderBikeHireDockingStation = function renderBikeHireDockingStation(entity, coordinates) {
         var icon;
+        var status = "working"
+
+        // Search for the top priority icon-ready status
+        if (entity.status) {
+            availableBikeStatus.some((s) => {
+                if (entity.status.indexOf(s) != -1) {
+                    status = s;
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        }
+
         icon = {
             anchor: [0.5, 1],
             scale: 0.4,
-            src: internalUrl('images/bikestation/icon.png')
+            src: internalUrl('images/bikestation/' + status + '.png')
         };
         var poi = {
             id: entity.id,
