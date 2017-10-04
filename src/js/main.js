@@ -795,15 +795,18 @@
         var  date  = moment(entity.dateModified, null, MashupPlatform.context.get('language')).format('llll');
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
 
-        if (entity.value != null) {
-            var result = "";
+        if (entity.value) {
+            var measures = '<p><b><i class="fa fa-fw fa-list-ul"/> Values</b>:</p><ul>';
             var values = entity.value.split(";");
-
-            values.forEach(function (val, i) {
-                result += entity.controlledProperty[i] + " = " + val.split("=")[1] + ";";
+            values.forEach((val, i) => {
+                // Skip malformed values
+                if (val.split("=").length != 2) {
+                    return;
+                }
+                measures += '  <li><b>' + entity.controlledProperty[i] || val.split("=")[0] + '</b>: ' + val.split("=")[1] + '</li>';
             });
-
-            infoWindow += '<p><i class="fa fa-fw fa-info"/>' + result + '</p>';
+            measures += '</ul>';
+            infoWindow += measures;
         }
 
         infoWindow += "</div>";
