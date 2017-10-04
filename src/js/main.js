@@ -1322,6 +1322,10 @@
             infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Free slots:</b> ' + entity.freeSlotNumber + extraInfo + '</p>';
         }
 
+        if (entity.outOfServiceSlotNumber) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Out of service slots:</b> ' + entity.outOfServiceSlotNumber + '</p>';
+        }
+
         if (entity.openingHours) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Open hours:</b> ' + entity.openingHours + '</p>';
         }
