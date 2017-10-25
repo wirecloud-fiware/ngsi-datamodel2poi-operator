@@ -1,7 +1,18 @@
+## v3.0.6 (2017-10-25)
+
+* Added Bike docking station icons depending on the station status
+* Added water quality icons depending on dissolved oxygen
+* Improved Weather forecast data display
+* Improved Street light data display
+* Improved Device data display
+* Improved BikeHireDockingStation data display
+* Fixed weather forecast and weather observed icon errors when `weatherType` is not defined
+
+
 ## v3.0.5 (2017-09-29)
 
 * Improved Vehicle model: Use a different icon depending on the vehicle
-* Improve BikeHireDockingStation data popup
+* Improved BikeHireDockingStation data popup
 * Improved documentation
 
 ## v3.0.4 (2017-09-28)
