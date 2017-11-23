@@ -9,12 +9,12 @@ inside any of the map widgets available for WireCloud.
 Be sure to have installed [Node.js](https://nodejs.org/). For example, you can install it on Ubuntu and Debian running the following commands:
 
 ```bash
-apt update; apt install curl gnupg
+sudo apt update; sudo apt install curl gnupg
 curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
 sudo apt install nodejs npm
 ```
 
-You also have to install [Grunt](https://gruntjs.com/)'s command line interface (CLI):
+You also have to install the [Grunt](https://gruntjs.com/)'s command line interface (CLI):
 
 ```bash
 sudo npm install -g grunt-cli
