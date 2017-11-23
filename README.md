@@ -4,29 +4,33 @@ The *NGSI datamodel 2 PoI* operator is useful for formating entities using
 any of the [FIWARE Data Models](https://schema.fiware.org) to be displayed
 inside any of the map widgets available for WireCloud.
 
-## Build
+## Build dependencies
 
-Be sure to have installed [Node.js](http://node.js). For example, you can install it on Ubuntu and Debian running the following commands:
-
-```bash
-curl -sL https://deb.nodesource.com/setup | sudo bash -
-sudo apt-get install nodejs
-sudo apt-get install npm
-```
-
-Install other npm dependencies by running:
+Be sure to have installed [Node.js](https://nodejs.org/). For example, you can install it on Ubuntu and Debian running the following commands:
 
 ```bash
-npm install
+apt update; apt install curl gnupg
+curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
+sudo apt install nodejs npm
 ```
 
-For build the operator you need download grunt:
+You also have to install [Grunt](https://gruntjs.com/)'s command line interface (CLI):
 
 ```bash
 sudo npm install -g grunt-cli
 ```
 
-And now, you can use grunt:
+The remaining dependencies are installed using npm (you have to run this command
+inside the folder where you downloaded this repository):
+
+```bash
+npm install
+```
+
+
+## Build
+
+Once installed all the build dependencies you can build this operator by using grunt:
 
 ```bash
 grunt
