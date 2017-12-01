@@ -29,23 +29,29 @@
         if (!Array.isArray(entities)) {
             entities = [entities];
         }
+
         var pois = entities.map(processEntity).filter((poi) => {return poi != null;});
         MashupPlatform.wiring.pushEvent("poiOutput", pois);
+
     });
 
     var processEntity = function processEntity(entity) {
         var coordinates = null;
+        // Check if the entity is supported by this operator and log an error otherwise
+        if (builders[entity.type] != undefined) {
+            if (entity.location != null && typeof entity.location === "object") {
+                // GeoJSON format: longitude, latitude[, elevation]
+                // WireCloud: latitude and longitude
+                coordinates = {
+                    system: "WGS84",
+                    lng: parseFloat(entity.location.coordinates[0]),
+                    lat: parseFloat(entity.location.coordinates[1])
+                };
 
-        if (entity.location != null && typeof entity.location === "object") {
-            // GeoJSON format: longitude, latitude[, elevation]
-            // WireCloud: latitude and longitude
-            coordinates = {
-                system: "WGS84",
-                lng: parseFloat(entity.location.coordinates[0]),
-                lat: parseFloat(entity.location.coordinates[1])
-            };
-
-            return entity2poi(entity, coordinates);
+                return entity2poi(entity, coordinates);
+            }
+        } else {
+            MashupPlatform.operator.log("Entity type is not supported: " + entity.type);
         }
     };
 
