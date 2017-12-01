@@ -1341,6 +1341,63 @@
         return infoWindow;
     };
 
+    var renderKeyPerformanceIndicator = function renderKeyPerformanceIndicator(entity, coordinates) {
+        var icon, src;
+
+        // Get icon based on currentStanding
+        src = internalUrl('images/KPI/' + (entity.currentStanding || "undefined") + '.png');
+
+        icon = {
+            anchor: [0.5, 1],
+            scale: 0.4,
+            src: src
+        };
+        var poi = {
+            id: entity.id,
+            icon: icon,
+            tooltip: entity.id,
+            data: entity,
+            title: entity.name,
+            infoWindow: buildKeyPerformanceIndicatorWindow.call(this, entity),
+            currentLocation: coordinates,
+            location: entity.location
+        };
+
+        return poi;
+    };
+
+    var buildKeyPerformanceIndicatorWindow = function buildKeyPerformanceIndicatorWindow(entity) {
+        var infoWindow = "<div>";
+
+        if (entity.description != null) {
+            infoWindow += '<p>' + entity.description + '</p>';
+        }
+
+        if (entity.currentStanding) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Standing:</b> ' + entity.currentStanding + '</p>';
+        }
+
+        if (entity.process || entity.product) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Evaluating:</b> ' + (entity.process || entity.product) + '</p>';
+        }
+
+        if (entity.kpiValue) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Value:</b> ' + entity.kpiValue + '</p>';
+        }
+
+        if (entity.dateModified) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Last calculation:</b> ' + entity.dateModified + '</p>';
+        }
+
+        if (entity.calculationFrequency) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Frequency:</b> ' + entity.calculationFrequency + '</p>';
+        }
+
+        infoWindow += "</div>";
+
+        return infoWindow;
+    };
+
     var builders = {
         "AirQualityObserved": renderAirQualityObserved,
         "WaterQualityObserved": renderWaterQualityObserved,
@@ -1369,7 +1426,9 @@
         "Garden": renderGarden,
 
         "Vehicle": renderVehicle,
-        "BikeHireDockingStation": renderBikeHireDockingStation
+        "BikeHireDockingStation": renderBikeHireDockingStation,
+
+        "KeyPerformanceIndicator": renderKeyPerformanceIndicator
     };
 
 })();
