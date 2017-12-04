@@ -22,7 +22,7 @@
     "use strict";
 
     MashupPlatform.wiring.registerCallback("entityInput", function (entities) {
-        if (entities === "string") {
+        if (typeof entities === "string") {
             entities = JSON.parse(entities);
         }
 
