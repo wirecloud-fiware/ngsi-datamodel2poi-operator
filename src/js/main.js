@@ -1498,38 +1498,51 @@
 
 
     var builders = {
+        // Alerts
+        "Alert": renderAlert,
+
+        // Civic Issue Tracking
+        "Open311:ServiceRequest": renderServiceRequest,
+
+        // Device
+        "Device": renderDevice,
+
+        // Environment
         "AirQualityObserved": renderAirQualityObserved,
         "WaterQualityObserved": renderWaterQualityObserved,
         "NoiseLevelObserved": renderNoiseLevelObserved,
 
+        // Indicators
+        "KeyPerformanceIndicator": renderKeyPerformanceIndicator,
+
+        // Parking
         "OffStreetParking": renderOffStreetParking,
         "OnStreetParking": renderOnStreetParking,
 
-        "WeatherForecast": renderWeatherForecast,
-        "WeatherObserved": renderWeatherObserved,
+        // Parks & Gardens
+        "Garden": renderGarden,
 
+        // Point Of Interest
         "PointOfInterest": renderPointOfInterest,
         "Beach": renderBeach,
         "Museum": renderMuseum,
 
-        "Device": renderDevice,
-
+        // Street Lighting
         "Streetlight": renderStreetlight,
         "StreetlightGroup": renderStreetlightGroup,
         "StreetlightControlCabinet": renderStreetlightControlCabinet,
 
-        "WasteContainer": renderWasteContainer,
-        "WasteContainerIsle": renderWasteContainerIsle,
-        "Open311:ServiceRequest": renderServiceRequest,
-
-        "Garden": renderGarden,
-
+        // Transportation
         "Vehicle": renderVehicle,
         "BikeHireDockingStation": renderBikeHireDockingStation,
 
-        "KeyPerformanceIndicator": renderKeyPerformanceIndicator,
+        // Waste Management
+        "WasteContainer": renderWasteContainer,
+        "WasteContainerIsle": renderWasteContainerIsle,
 
-        "Alert": renderAlert
+        // Weather
+        "WeatherForecast": renderWeatherForecast,
+        "WeatherObserved": renderWeatherObserved
     };
 
 })();
