@@ -1354,7 +1354,7 @@
         var icon, src;
 
         // Get icon based on currentStanding
-        src = internalUrl('images/KPI/' + (entity.currentStanding || "undefined") + '.png');
+        src = internalUrl('images/kpi/' + (entity.currentStanding || "undefined").replace(/\s+/, '') + '.png');
 
         icon = {
             anchor: [0.5, 1],
