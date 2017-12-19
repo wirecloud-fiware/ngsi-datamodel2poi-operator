@@ -117,12 +117,21 @@
             src: internalUrl('images/airquality/' + level + '.png')
         };
 
+        // Build tooltip title
+        var title = "";
+        if (entity.stationName) {
+            title = entity.stationName;
+            if (entity.stationCode) {
+                title = " (" + entity.stationCode + ")";
+            }
+        }
+
         var poi = {
             id: entity.id,
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.stationName + ' (' + entity.stationCode + ')',
+            title: title || entity.id,
             infoWindow: buildAirQualityObservedInfoWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location,
@@ -338,7 +347,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.name,
+            title: entity.name || entity.id,
             infoWindow: buildOffStreetParkingInfoWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location,
@@ -418,7 +427,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.name,
+            title: entity.name || entity.id,
             infoWindow: buildOnStreetParkingInfoWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location,
@@ -459,7 +468,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.name,
+            title: entity.name || entity.id,
             infoWindow: buildPointOfInterestInfoWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -497,7 +506,7 @@
             src: internalUrl('images/weather/' + type + '.png')
         };
 
-        var title;
+        var title = "";
         if (entity.address != null && entity.address.addressLocality && entity.address.addressProvince) {
             title = entity.address.addressLocality + ' (' + entity.address.addressProvince + ')';
         } else if (entity.address != null && entity.address.addressLocality) {
@@ -509,7 +518,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: title,
+            title: title || entity.id,
             infoWindow: buildWeatherForecastInfoWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -571,7 +580,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: name,
+            title: name || entity.id,
             infoWindow: buildBeachWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -648,7 +657,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: name,
+            title: name || entity.id,
             infoWindow: buildMuseumWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -720,7 +729,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.name,
+            title: entity.name || entity.stationName || entity.id,
             infoWindow: buildWeatherObservedInfoWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -783,7 +792,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.name,
+            title: entity.name || entity.id,
             infoWindow: buildDeviceWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -953,7 +962,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.areaServed,
+            title: entity.areaServed || entity.id,
             infoWindow: buildStreetlightControlCabinetWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -1017,7 +1026,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.serialNumber,
+            title: entity.serialNumber || entity.id,
             infoWindow: buildWasteContainerWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -1063,7 +1072,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.name,
+            title: entity.name || entity.id,
             infoWindow: buildWasteContainerIsleWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -1111,7 +1120,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.name,
+            title: entity.service_name || entity.id,
             infoWindow: buildServiceRequestWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -1157,7 +1166,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: name,
+            title: name || entity.id,
             infoWindow: buildGardenWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -1199,7 +1208,7 @@
             src: internalUrl('images/vehicle/' + entity.vehicleType + "-" + entity.serviceStatus.split(",")[0] + '.png')
         };
 
-        title = ""
+        title = "";
         var id = entity.vehiclePlateIdentifier || entity.vehicleIdentificationNumber || null;
         if (entity.name) {
             title = entity.name + "(" + id + ")";
@@ -1212,7 +1221,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: title,
+            title: title || entity.id,
             infoWindow: buildVehicleWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -1295,7 +1304,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.name,
+            title: entity.name || entity.id,
             infoWindow: buildBikeHireDockingStationWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -1357,7 +1366,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.name,
+            title: entity.name || entity.id,
             infoWindow: buildKeyPerformanceIndicatorWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
