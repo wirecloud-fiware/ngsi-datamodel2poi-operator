@@ -1398,6 +1398,96 @@
         return infoWindow;
     };
 
+    var getAlertIconSubcategory = function getAlertIconSubcategory(entity) {
+        var result = entity.subCategory;
+        switch (entity.category) {
+        case "traffic":
+            // Icon
+            if (result === "carWrongDirection" || result === "carStopped" || result === "injuredBiker") {
+                result = "carAccident";
+            }
+            break;
+        case "weather":
+            if (result === "heatWave") {
+                result = "highTemperature";
+            }
+            ;
+            break;
+        case "health":
+            if (result === "bumpedPatient") {
+                result = "fallenPatient";
+            } else if (result === "tropicalCyclone" || result === "hurricane") {
+                result = "tornado";
+            }
+            break;
+        default: break;
+        }
+
+        return result;
+    };
+
+    var renderAlert = function renderAlert(entity, coordinates) {
+
+        var icon, src;
+        // Get icon based on category and subcategory
+        var severity = entity.serverity || "informational";
+        if (severity === "critical") {
+            severity = "high";
+        }
+        var subCategory = getAlertIconSubcategory(entity);
+        src = internalUrl('images/alerts/' + entity.category + '/' + subCategory + '_' + severity + '.png');
+
+        icon = {
+            anchor: [0.5, 1],
+            scale: 0.4,
+            src: src
+        };
+        var poi = {
+            id: entity.id,
+            icon: icon,
+            tooltip: entity.id,
+            data: entity,
+            title: "Alert - " + entity.category,
+            infoWindow: buildAlertWindow.call(this, entity),
+            currentLocation: coordinates,
+            location: entity.location
+        };
+
+        return poi;
+    };
+
+    var buildAlertWindow = function buildAlertWindow(entity) {
+        var infoWindow = "<div>";
+
+        if (entity.subCategory != null) {
+            // Capitalize first letter and add spaces to undo the camelCase
+            var msg = entity.subCategory.charAt(0).toUpperCase() + entity.subCategory.slice(1).replace(/([A-Z])/g, ' $1').trim()
+            infoWindow += '<p><b>' + msg + '</b></p>';
+        }
+
+        if (entity.serverity) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Severity:</b> ' + entity.severity + '</p>';
+        }
+
+        if (entity.description != null) {
+            infoWindow += '<p>' + entity.description + '</p>';
+        }
+
+        if (entity.dateObserved) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Date observed:</b> ' + entity.dateObserved + '</p>';
+        }
+
+        if (entity.alertSource) {
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Alert source:</b> ' + entity.alertSource + '</p>';
+        }
+
+        infoWindow += "</div>";
+
+        return infoWindow;
+    };
+
+
+
     var builders = {
         "AirQualityObserved": renderAirQualityObserved,
         "WaterQualityObserved": renderWaterQualityObserved,
@@ -1428,7 +1518,9 @@
         "Vehicle": renderVehicle,
         "BikeHireDockingStation": renderBikeHireDockingStation,
 
-        "KeyPerformanceIndicator": renderKeyPerformanceIndicator
+        "KeyPerformanceIndicator": renderKeyPerformanceIndicator,
+
+        "Alert": renderAlert
     };
 
 })();
