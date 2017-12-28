@@ -1,3 +1,9 @@
+## v3.0.7 (2017-12-28)
+
+* Added initial support for kpi data models
+* Added initial support for alert data models
+* Added icon for point of interest of type school
+
 ## v3.0.6 (2017-10-25)
 
 * Added Bike docking station icons depending on the station status
