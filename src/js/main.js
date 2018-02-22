@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2017 CoNWeT Lab., Universidad Politécnica de Madrid
+ * Copyright (c) 2018 Future Internet Consulting and Development Solutions S.L.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +22,24 @@
 
     "use strict";
 
-    MashupPlatform.wiring.registerCallback("entityInput", function (entities) {
-        if (typeof entities === "string") {
-            entities = JSON.parse(entities);
+    var parseInputEndpointData = function parseInputEndpointData(data) {
+        if (typeof data === "string") {
+            try {
+                data = JSON.parse(data);
+            } catch (e) {
+                throw new MashupPlatform.wiring.EndpointTypeError();
+            }
         }
+
+        if (data == null || typeof data !== "object") {
+            throw new MashupPlatform.wiring.EndpointTypeError();
+        }
+
+        return data;
+    };
+
+    var processIncomingData = function processIncomingData(entities) {
+        entities = parseInputEndpointData(entities);
 
         if (!Array.isArray(entities)) {
             entities = [entities];
@@ -33,7 +48,7 @@
         var pois = entities.map(processEntity).filter((poi) => {return poi != null;});
         MashupPlatform.wiring.pushEvent("poiOutput", pois);
 
-    });
+    };
 
     var processEntity = function processEntity(entity) {
         var coordinates = null;
@@ -1544,5 +1559,17 @@
         "WeatherForecast": renderWeatherForecast,
         "WeatherObserved": renderWeatherObserved
     };
+
+
+    /* TODO
+     * this if is required for testing, but we have to search a cleaner way
+     */
+    if (window.MashupPlatform != null) {
+        MashupPlatform.wiring.registerCallback("entityInput", processIncomingData);
+    }
+
+    /* test-code */
+    window.processIncomingData = processIncomingData;
+    /* end-test-code */
 
 })();
