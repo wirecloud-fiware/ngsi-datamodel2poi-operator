@@ -84,6 +84,38 @@
         }
     };
 
+    var processAddress = function processAddress(entity) {
+        if (entity.address == null || typeof entity.address !== "object") {
+            return "";
+        }
+
+        var infoWindow = '<p><b><i class="fa fa-fw fa-address-card-o"/> Address: </b><br/>';
+        if (entity.address.streetAddress) {
+            infoWindow += entity.address.streetAddress + '<br/>';
+        }
+
+        var line = [];
+        if (entity.address.addressLocality) {
+            line.push(entity.address.addressLocality);
+        }
+        if (entity.address.addressRegion) {
+            line.push(entity.address.addressRegion);
+        }
+        if (entity.address.postalCode) {
+            line.push(entity.address.postalCode);
+        }
+
+        if (line.length > 0) {
+            infoWindow += line.join(', ') + '<br/>';
+        }
+
+        if (entity.address.addressCountry) {
+            infoWindow += entity.address.addressCountry;
+        }
+        infoWindow += '</p>';
+
+        return infoWindow;
+    };
 
     var renderAirQualityObserved = function renderAirQualityObserved(entity, coordinates) {
         var icon, level, style;
@@ -170,6 +202,8 @@
 
     var buildAirQualityObservedInfoWindow = function buildAirQualityObservedInfoWindow(entity) {
         var infoWindow = "<div>";
+
+        infoWindow += processAddress(entity);
 
         var date = displayDate(entity.dateObserved);
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
@@ -498,6 +532,7 @@
         if (entity.description != null) {
             infoWindow += '<p>' + entity.description + '</p>';
         }
+        infoWindow += processAddress(entity);
 
         var date = moment(entity.dateModified, null, MashupPlatform.context.get('language')).format('llll');
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
@@ -522,8 +557,8 @@
         };
 
         var title = "";
-        if (entity.address != null && entity.address.addressLocality && entity.address.addressProvince) {
-            title = entity.address.addressLocality + ' (' + entity.address.addressProvince + ')';
+        if (entity.address != null && entity.address.addressLocality && entity.address.addressRegion) {
+            title = entity.address.addressLocality + ' (' + entity.address.addressRegion + ')';
         } else if (entity.address != null && entity.address.addressLocality) {
             title = entity.address.addressLocality;
         }
@@ -544,6 +579,7 @@
 
     var buildWeatherForecastInfoWindow = function buildWeatherForecastInfoWindow(entity) {
         var infoWindow = "<div>";
+        infoWindow += processAddress(entity);
 
         var date = moment(entity.dateObserved, null, MashupPlatform.context.get('language')).format('llll');
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
@@ -610,6 +646,8 @@
         if (entity.description != null) {
             infoWindow += '<p>' + entity.description + '</p>';
         }
+
+        infoWindow += processAddress(entity);
 
         if (entity.occupationRate) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> Occupation rate: ' + entity.occupationRate + '</p>';
@@ -688,6 +726,8 @@
             infoWindow += '<p>' + entity.description + '</p>';
         }
 
+        infoWindow += processAddress(entity);
+
         if (entity.artPeriod) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Art period:</b> ' + entity.artPeriod.join(", ") + '</p>';
         } else if (entity.historicalPeriod) {
@@ -755,6 +795,7 @@
 
     var buildWeatherObservedInfoWindow = function buildWeatherObservedInfoWindow(entity) {
         var infoWindow = "<div>";
+        infoWindow += processAddress(entity);
 
         var date = displayDate(entity.dateObserved);
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
@@ -822,7 +863,10 @@
         if (entity.description != null) {
             infoWindow += '<p>' + entity.description + '</p>';
         }
-        var  date  = moment(entity.dateModified, null, MashupPlatform.context.get('language')).format('llll');
+
+        infoWindow += processAddress(entity);
+
+        var date = moment(entity.dateModified, null, MashupPlatform.context.get('language')).format('llll');
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
 
         if (entity.value) {
@@ -844,7 +888,7 @@
         return infoWindow;
     };
 
-    var renderStreetlight  = function renderStreetlight(entity, coordinates) {
+    var renderStreetlight = function renderStreetlight(entity, coordinates) {
         var iconSrc;
         if (entity.status !== "ok") {
             iconSrc = internalUrl('images/streetlight/notworking.png');
@@ -881,6 +925,8 @@
         if (entity.description != null) {
             infoWindow += '<p>' + entity.description + '</p>';
         }
+
+        infoWindow += processAddress(entity);
 
         var status;
         if (entity.status === "ok") {
@@ -941,6 +987,8 @@
             infoWindow += '<p>' + entity.description + '</p>';
         }
 
+        infoWindow += processAddress(entity);
+
         var status;
         if (entity.powerState) {
             status = entity.powerState;
@@ -992,6 +1040,8 @@
         if (entity.description != null) {
             infoWindow += '<p>' + entity.description + '</p>';
         }
+
+        infoWindow += processAddress(entity);
 
         if (entity.energyConsumed || entity.lastMeterReading) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> Energy consumed: ' + entity.energyConsumed || entity.lastMeterReading + ' kW</p>';
@@ -1057,6 +1107,8 @@
             infoWindow += '<p>' + entity.description + '</p>';
         }
 
+        infoWindow += processAddress(entity);
+
         if (entity.category) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> Container type: ' + entity.category.join(", ") + '</p>';
         }
@@ -1102,6 +1154,8 @@
         if (entity.description != null) {
             infoWindow += '<p>' + entity.description + '</p>';
         }
+
+        infoWindow += processAddress(entity);
 
         if (entity.category) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> Isle features: ' + entity.features.join(", ") + '</p>';
@@ -1151,6 +1205,8 @@
             infoWindow += '<p>' + entity.description + '</p>';
         }
 
+        infoWindow += processAddress(entity);
+
         if (entity.status) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Request status:</b> ' + entity.status + ": " + entity.status_notes + '</p>';
         }
@@ -1196,6 +1252,8 @@
         if (entity.description != null) {
             infoWindow += '<p>' + entity.description + '</p>';
         }
+
+        infoWindow += processAddress(entity);
 
         if (entity.category) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Category:</b> ' + entity.category.join(", ") + '</p>';
@@ -1251,6 +1309,8 @@
         if (entity.description != null) {
             infoWindow += '<p>' + entity.description + '</p>';
         }
+
+        infoWindow += processAddress(entity);
 
         if (entity.vehicleType) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Type:</b> ' + entity.vehicleType + '</p>';
@@ -1335,6 +1395,8 @@
             infoWindow += '<p>' + entity.description + '</p>';
         }
 
+        infoWindow += processAddress(entity);
+
         if (entity.status) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Status:</b> ' + entity.status + '</p>';
         }
@@ -1396,6 +1458,8 @@
         if (entity.description != null) {
             infoWindow += '<p>' + entity.description + '</p>';
         }
+
+        infoWindow += processAddress(entity);
 
         if (entity.currentStanding) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Standing:</b> ' + entity.currentStanding + '</p>';
@@ -1482,6 +1546,7 @@
 
     var buildAlertWindow = function buildAlertWindow(entity) {
         var infoWindow = "<div>";
+        infoWindow += processAddress(entity);
 
         if (entity.subCategory != null) {
             // Capitalize first letter and add spaces to undo the camelCase
