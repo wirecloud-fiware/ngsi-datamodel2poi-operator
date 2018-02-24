@@ -1273,12 +1273,18 @@
     };
 
     var renderVehicle = function renderVehicle(entity, coordinates) {
-        var icon, title;
+        var icon, title, vehicleStatus;
+
+        if (entity.serviceStatus == null || entity.serviceStatus.trim() == '') {
+            vehicleStatus = 'onRoute';
+        } else {
+            vehicleStatus = entity.serviceStatus.split(",")[0];
+        }
 
         icon = {
             anchor: [0.5, 1],
             scale: 0.4,
-            src: internalUrl('images/vehicle/' + entity.vehicleType + "-" + entity.serviceStatus.split(",")[0] + '.png')
+            src: internalUrl('images/vehicle/' + entity.vehicleType + "-" + vehicleStatus + '.png')
         };
 
         title = "";
