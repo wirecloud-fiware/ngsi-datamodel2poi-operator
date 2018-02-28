@@ -129,6 +129,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: [
+                    'bower_components/moment/min/moment-with-locales.min.js',
                     'node_modules/mock-applicationmashup/dist/MockMP.js',
                     'src/js/*.js',
                     'tests/js/*Spec.js'

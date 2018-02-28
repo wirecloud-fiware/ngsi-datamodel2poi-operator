@@ -412,6 +412,8 @@
         if (entity.description != null) {
             infoWindow += '<p>' + entity.description + '</p>';
         }
+        infoWindow += processAddress(entity);
+
         var date = moment(entity.dateModified, null, MashupPlatform.context.get('language')).format('llll');
         infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
 
@@ -1275,6 +1277,7 @@
     var renderVehicle = function renderVehicle(entity, coordinates) {
         var icon, title, vehicleStatus;
 
+        // serviceStatus is not required
         if (entity.serviceStatus == null || entity.serviceStatus.trim() == '') {
             vehicleStatus = 'onRoute';
         } else {
@@ -1290,7 +1293,7 @@
         title = "";
         var id = entity.vehiclePlateIdentifier || entity.vehicleIdentificationNumber || null;
         if (entity.name) {
-            title = entity.name + "(" + id + ")";
+            title = entity.name + " (" + id + ")";
         } else {
             title = id;
         }
