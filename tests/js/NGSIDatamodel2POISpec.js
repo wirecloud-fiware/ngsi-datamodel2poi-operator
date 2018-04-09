@@ -118,6 +118,38 @@
             processIncomingData([entity]);
         });
 
+        it("minimal AirQualityObserved", () => {
+            // Minimal Alert entity (including location)
+            var entity = {
+                "id": "1",
+                "type": "AirQualityObserved",
+                "dateObserved": "2016-11-28T12:00:00.00Z",
+                "location":
+                {
+                    "type": "Point",
+                    "coordinates":
+                    [
+                        -3.712247222,
+                        40.423852778
+                    ]
+                },
+                "CO": 500
+            };
+
+            processIncomingData([entity]);
+            expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
+                "id": "1",
+                "icon": jasmine.anything(),
+                "tooltip": entity.id,
+                "data": entity,
+                "title": entity.id,
+                "infoWindow": jasmine.anything(),
+                "currentLocation": jasmine.anything(),
+                "location": jasmine.anything(),
+                "style": jasmine.anything()
+            }]);
+        });
+
         it("minimal OffStreetParking", () => {
             var entity = {
                 "id": "1",

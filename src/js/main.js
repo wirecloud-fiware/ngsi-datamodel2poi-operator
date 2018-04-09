@@ -200,6 +200,23 @@
         "M1": "mg/l"
     };
 
+    var pollutants = [
+        "CH4",
+        "CO",
+        "BEN",
+        "EBE",
+        "NO",
+        "NO2",
+        "NOx",
+        "O3",
+        "PM2.5",
+        "PM10",
+        "NHMC",
+        "SO2",
+        "TCH",
+        "TOL"
+    ];
+
     var buildAirQualityObservedInfoWindow = function buildAirQualityObservedInfoWindow(entity) {
         var infoWindow = "<div>";
 
@@ -210,9 +227,11 @@
 
         infoWindow += '<p><b><i class="fa fa-fw fa-feed"/> Source: </b> ' + entity.source +  "</p>";
         var measures = '<p><b><i class="fa fa-fw fa-list-ul"/> Measures</b>:</p><ul>';
-        entity.measurand.forEach((pollutant_text) => {
-            var data = pollutant_text.split(",");
-            measures += '  <li><b>' + data[0] + '</b>: ' + (Math.round(data[1] * 100) / 100) + ' ' + units[data[2].trim()] + '</li>';
+        pollutants.forEach((pollutant) => {
+            if (pollutant in entity) {
+                // TODO We are missing units, we cannot access this as it is on the "unitCode" attribute metadata
+                measures += '  <li><b>' + pollutant + '</b>: ' + (Math.round(entity[pollutant] * 100) / 100) + '</li>';
+            }
         });
         measures += '</ul>';
         infoWindow += measures;
