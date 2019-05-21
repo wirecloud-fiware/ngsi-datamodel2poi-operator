@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<operator xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="ngsi-datamodel2poi" version="3.0.7">
+<operator xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="ngsi-datamodel2poi" version="3.0.8">
   <details>
     <title>FIWARE data model To PoI</title>
     <homepage>https://github.com/wirecloud-fiware/ngsi-datamodel2poi-operator</homepage>

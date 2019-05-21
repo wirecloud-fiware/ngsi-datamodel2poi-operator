@@ -1046,7 +1046,7 @@
             icon: icon,
             tooltip: entity.id,
             data: entity,
-            title: entity.areaServed || entity.id,
+            title: entity.id,
             infoWindow: buildStreetlightControlCabinetWindow.call(this, entity),
             currentLocation: coordinates,
             location: entity.location
@@ -1426,7 +1426,7 @@
         infoWindow += processAddress(entity);
 
         if (entity.status) {
-            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Status:</b> ' + entity.status + '</p>';
+            infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Status:</b> ' + entity.status.join(', ') + '</p>';
         }
 
         if (entity.availableBikeNumber) {
