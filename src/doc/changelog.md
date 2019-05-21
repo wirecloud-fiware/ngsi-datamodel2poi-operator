@@ -1,3 +1,11 @@
+## v3.0.8 (2019-05-21)
+
+- Added support for processing and displaying addresses
+- Added tests for continuos integration using Travis and Karma
+- Small fixes/improvements on the following datamodels: AirQualityObserved,
+    BikeHireDockingStation, StreetlightControlCabinet and Vehicle.
+
+
 ## v3.0.7 (2017-12-28)
 
 * Added initial support for kpi data models
