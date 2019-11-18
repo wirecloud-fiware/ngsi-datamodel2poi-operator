@@ -222,8 +222,11 @@
 
         infoWindow += processAddress(entity);
 
-        var date = displayDate(entity.dateObserved);
-        infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        var dateRaw = (entity.dateObserved) ? entity.dateObserved : entity.dateModified;
+        if (dateRaw) {
+            var date = displayDate(dateRaw);
+            infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        }
 
         infoWindow += '<p><b><i class="fa fa-fw fa-feed"/> Source: </b> ' + entity.source +  "</p>";
         var measures = '<p><b><i class="fa fa-fw fa-list-ul"/> Measures</b>:</p><ul>';
@@ -285,8 +288,11 @@
     var buildWaterQualityObservedWindow = function buildWaterQualityObservedWindow(entity) {
         var infoWindow = "<div>";
 
-        var date = displayDate(entity.dateObserved);
-        infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        var dateRaw = (entity.dateObserved) ? entity.dateObserved : entity.dateModified;
+        if (dateRaw) {
+            var date = displayDate(dateRaw);
+            infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        }
 
         if (entity.source) {
             infoWindow += '<p><b><i class="fa fa-fw fa-feed"/> Source: </b> ' + entity.source +  "</p>";
@@ -343,8 +349,11 @@
             infoWindow += '<p>' + entity.description + '</p>';
         }
 
-        var date = displayDate(entity.dateObserved);
-        infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        var dateRaw = (entity.dateObserved) ? entity.dateObserved : entity.dateModified;
+        if (dateRaw) {
+            var date = displayDate(dateRaw);
+            infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        }
 
         if (entity.sonometerClass != null) {
             infoWindow += '<p><b><i class="fa fa-fw fa-info"/> Sonometer class: </b> ' + entity.sonometerClass +  "</p>";
@@ -818,8 +827,11 @@
         var infoWindow = "<div>";
         infoWindow += processAddress(entity);
 
-        var date = displayDate(entity.dateObserved);
-        infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        var dateRaw = (entity.dateObserved) ? entity.dateObserved : entity.dateModified;
+        if (dateRaw) {
+            var date = displayDate(dateRaw);
+            infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        }
 
         if (entity.barometricPressure) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Pressure:</b> ' + entity.barometricPressure + 'hPa</p>';

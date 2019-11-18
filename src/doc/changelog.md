@@ -1,3 +1,7 @@
+## v3.0.9b1 (2019-11-18)
+
+- Pick date from dateModified if not dateObserved, and make it optional
+
 ## v3.0.8 (2019-05-21)
 
 - Added support for processing and displaying addresses
