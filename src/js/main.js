@@ -222,8 +222,11 @@
 
         infoWindow += processAddress(entity);
 
-        var date = displayDate(entity.dateObserved);
-        infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        var dateRaw = (entity.dateObserved) ? entity.dateObserved : entity.dateModified;
+        if (dateRaw) {
+            var date = displayDate(dateRaw);
+            infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        }
 
         infoWindow += '<p><b><i class="fa fa-fw fa-feed"/> Source: </b> ' + entity.source +  "</p>";
         var measures = '<p><b><i class="fa fa-fw fa-list-ul"/> Measures</b>:</p><ul>';
@@ -285,8 +288,11 @@
     var buildWaterQualityObservedWindow = function buildWaterQualityObservedWindow(entity) {
         var infoWindow = "<div>";
 
-        var date = displayDate(entity.dateObserved);
-        infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        var dateRaw = (entity.dateObserved) ? entity.dateObserved : entity.dateModified;
+        if (dateRaw) {
+            var date = displayDate(dateRaw);
+            infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        }
 
         if (entity.source) {
             infoWindow += '<p><b><i class="fa fa-fw fa-feed"/> Source: </b> ' + entity.source +  "</p>";
@@ -301,13 +307,15 @@
         measures += '</ul>';
         infoWindow += measures;
 
-        var chems = '<p><b><i class="fa fa-fw fa-list-ul"/> Chemical agents</b>:</p><ul>';
-        entity.measurand.forEach((pollutant_text) => {
-            var data = pollutant_text.split(",");
-            chems += '  <li><b>' + data[0] + '</b>: ' + (Math.round(data[1] * 1000) / 1000) + ' ' + units[data[2].trim()] + '</li>';
-        });
-        chems += '</ul>';
-        infoWindow += chems;
+        if (Array.isArray(entity.measurand)) {
+            var chems = '<p><b><i class="fa fa-fw fa-list-ul"/> Chemical agents</b>:</p><ul>';
+            entity.measurand.forEach((pollutant_text) => {
+                var data = pollutant_text.split(",");
+                chems += '  <li><b>' + data[0] + '</b>: ' + (Math.round(data[1] * 1000) / 1000) + ' ' + units[data[2].trim()] + '</li>';
+            });
+            chems += '</ul>';
+            infoWindow += chems;
+        }
         infoWindow += "</div>";
 
         return infoWindow;
@@ -343,8 +351,11 @@
             infoWindow += '<p>' + entity.description + '</p>';
         }
 
-        var date = displayDate(entity.dateObserved);
-        infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        var dateRaw = (entity.dateObserved) ? entity.dateObserved : entity.dateModified;
+        if (dateRaw) {
+            var date = displayDate(dateRaw);
+            infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        }
 
         if (entity.sonometerClass != null) {
             infoWindow += '<p><b><i class="fa fa-fw fa-info"/> Sonometer class: </b> ' + entity.sonometerClass +  "</p>";
@@ -818,8 +829,11 @@
         var infoWindow = "<div>";
         infoWindow += processAddress(entity);
 
-        var date = displayDate(entity.dateObserved);
-        infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        var dateRaw = (entity.dateObserved) ? entity.dateObserved : entity.dateModified;
+        if (dateRaw) {
+            var date = displayDate(dateRaw);
+            infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+        }
 
         if (entity.barometricPressure) {
             infoWindow += '<p><i class="fa fa-fw fa-info"/> <b>Pressure:</b> ' + entity.barometricPressure + 'hPa</p>';
