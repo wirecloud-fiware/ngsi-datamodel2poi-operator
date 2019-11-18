@@ -118,36 +118,136 @@
             processIncomingData([entity]);
         });
 
-        it("minimal AirQualityObserved", () => {
-            // Minimal Alert entity (including location)
-            var entity = {
-                "id": "1",
-                "type": "AirQualityObserved",
-                "dateObserved": "2016-11-28T12:00:00.00Z",
-                "location":
-                {
-                    "type": "Point",
-                    "coordinates":
-                    [
-                        -3.712247222,
-                        40.423852778
-                    ]
-                },
-                "CO": 500
-            };
+        describe("process AirQualityObserved entities", () => {
 
-            processIncomingData([entity]);
-            expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
-                "id": "1",
-                "icon": jasmine.anything(),
-                "tooltip": entity.id,
-                "data": entity,
-                "title": entity.id,
-                "infoWindow": jasmine.anything(),
-                "currentLocation": jasmine.anything(),
-                "location": jasmine.anything(),
-                "style": jasmine.anything()
-            }]);
+            it("permisive payload", () => {
+                // Minimal, although not datamodel compliant, AirQualityObserved entity (including location)
+                var entity = {
+                    "id": "1",
+                    "type": "AirQualityObserved",
+                    "location":
+                    {
+                        "type": "Point",
+                        "coordinates":
+                        [
+                            -3.712247222,
+                            40.423852778
+                        ]
+                    },
+                    "CO": 500
+                };
+
+                processIncomingData([entity]);
+                expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
+                    "id": "1",
+                    "icon": jasmine.anything(),
+                    "tooltip": entity.id,
+                    "data": entity,
+                    "title": entity.id,
+                    "infoWindow": jasmine.anything(),
+                    "currentLocation": jasmine.anything(),
+                    "location": jasmine.anything(),
+                    "style": jasmine.anything()
+                }]);
+            });
+
+            it("minimal data", () => {
+                // Minimal Alert entity (including location)
+                var entity = {
+                    "id": "1",
+                    "type": "AirQualityObserved",
+                    "dateObserved": "2016-11-28T12:00:00.00Z",
+                    "location":
+                    {
+                        "type": "Point",
+                        "coordinates":
+                        [
+                            -3.712247222,
+                            40.423852778
+                        ]
+                    },
+                    "CO": 500
+                };
+
+                processIncomingData([entity]);
+                expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
+                    "id": "1",
+                    "icon": jasmine.anything(),
+                    "tooltip": entity.id,
+                    "data": entity,
+                    "title": entity.id,
+                    "infoWindow": jasmine.anything(),
+                    "currentLocation": jasmine.anything(),
+                    "location": jasmine.anything(),
+                    "style": jasmine.anything()
+                }]);
+            });
+
+        });
+
+        describe("process NoiseLevelObserved entities", () => {
+
+            it("permisive payload", () => {
+                // Minimal, although not datamodel compliant, NoiseLevelObserved entity (including location)
+                var entity = {
+                    "id": "1",
+                    "type": "NoiseLevelObserved",
+                    "location":
+                    {
+                        "type": "Point",
+                        "coordinates":
+                        [
+                            -3.712247222,
+                            40.423852778
+                        ]
+                    },
+                    "LAS": 91.6
+                };
+
+                processIncomingData([entity]);
+                expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
+                    "id": "1",
+                    "icon": jasmine.anything(),
+                    "tooltip": entity.id,
+                    "data": entity,
+                    "title": entity.id,
+                    "infoWindow": jasmine.anything(),
+                    "currentLocation": jasmine.anything(),
+                    "location": jasmine.anything()
+                }]);
+            });
+
+            it("minimal data", () => {
+                // Minimal Alert entity (including location)
+                var entity = {
+                    "id": "1",
+                    "type": "NoiseLevelObserved",
+                    "dateObserved": "2016-11-28T12:00:00.00Z",
+                    "location":
+                    {
+                        "type": "Point",
+                        "coordinates":
+                        [
+                            -3.712247222,
+                            40.423852778
+                        ]
+                    },
+                    "LAS": 91.6
+                };
+
+                processIncomingData([entity]);
+                expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
+                    "id": "1",
+                    "icon": jasmine.anything(),
+                    "tooltip": entity.id,
+                    "data": entity,
+                    "title": entity.id,
+                    "infoWindow": jasmine.anything(),
+                    "currentLocation": jasmine.anything(),
+                    "location": jasmine.anything()
+                }]);
+            });
+
         });
 
         it("minimal OffStreetParking", () => {
@@ -277,6 +377,137 @@
 
             it("using vehiclePlateIdentifier", test("vehiclePlateIdentifier", "3456ABC"));
             it("using vehicleIdentificationNumber", test("vehicleIdentificationNumber", "1M8GDM9AXKP042788"));
+        });
+
+        describe("process WaterQualityObserved entities", () => {
+
+            it("permisive WaterQualityObserved", () => {
+                // Minimal, although not datamodel compliant, WaterQualityObserved entity (including location)
+                var entity = {
+                    "id": "1",
+                    "type": "WaterQualityObserved",
+                    "location":
+                    {
+                        "type": "Point",
+                        "coordinates":
+                        [
+                            -3.712247222,
+                            40.423852778
+                        ]
+                    },
+                    "pH": 7.4
+                };
+
+                processIncomingData([entity]);
+                expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
+                    "id": "1",
+                    "icon": jasmine.anything(),
+                    "tooltip": entity.id,
+                    "data": entity,
+                    "title": entity.id,
+                    "infoWindow": jasmine.anything(),
+                    "currentLocation": jasmine.anything(),
+                    "location": jasmine.anything()
+                }]);
+            });
+
+            it("minimal WaterQualityObserved", () => {
+                // Minimal Alert entity (including location)
+                var entity = {
+                    "id": "1",
+                    "type": "WaterQualityObserved",
+                    "dateObservedFrom": "2016-11-28T12:00:00.00Z",
+                    "dateObservedTo": "2016-11-28T13:00:00.00Z",
+                    "location":
+                    {
+                        "type": "Point",
+                        "coordinates":
+                        [
+                            -3.712247222,
+                            40.423852778
+                        ]
+                    },
+                    "pH": 7.4
+                };
+
+                processIncomingData([entity]);
+                expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
+                    "id": "1",
+                    "icon": jasmine.anything(),
+                    "tooltip": entity.id,
+                    "data": entity,
+                    "title": entity.id,
+                    "infoWindow": jasmine.anything(),
+                    "currentLocation": jasmine.anything(),
+                    "location": jasmine.anything()
+                }]);
+            });
+
+        });
+
+        describe("process WeatherObserved entities", () => {
+
+            it("permisive payload", () => {
+                // Minimal, although not datamodel compliant, WeatherObserved entity (including location)
+                var entity = {
+                    "id": "1",
+                    "type": "WeatherObserved",
+                    "location":
+                    {
+                        "type": "Point",
+                        "coordinates":
+                        [
+                            -3.712247222,
+                            40.423852778
+                        ]
+                    },
+                    "temperature": 22
+                };
+
+                processIncomingData([entity]);
+                expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
+                    "id": "1",
+                    "icon": jasmine.anything(),
+                    "tooltip": entity.id,
+                    "data": entity,
+                    "title": entity.id,
+                    "infoWindow": jasmine.anything(),
+                    "currentLocation": jasmine.anything(),
+                    "location": jasmine.anything()
+                }]);
+            });
+
+            it("minimal data", () => {
+                // Minimal Alert entity (including location)
+                var entity = {
+                    "id": "1",
+                    "type": "WeatherObserved",
+                    "dateObserved": "2016-11-28T12:00:00.00Z",
+                    "location":
+                    {
+                        "type": "Point",
+                        "coordinates":
+                        [
+                            -3.712247222,
+                            40.423852778
+                        ]
+                    },
+                    "temperature": 22
+                };
+
+                processIncomingData([entity]);
+                expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
+                    "id": "1",
+                    "icon": jasmine.anything(),
+                    "tooltip": entity.id,
+                    "data": entity,
+                    "title": entity.id,
+                    "infoWindow": jasmine.anything(),
+                    "currentLocation": jasmine.anything(),
+                    "location": jasmine.anything()
+                }]);
+            });
+
         });
 
         describe("process BikeHireDockingStation entities", () => {

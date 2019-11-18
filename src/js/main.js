@@ -307,13 +307,15 @@
         measures += '</ul>';
         infoWindow += measures;
 
-        var chems = '<p><b><i class="fa fa-fw fa-list-ul"/> Chemical agents</b>:</p><ul>';
-        entity.measurand.forEach((pollutant_text) => {
-            var data = pollutant_text.split(",");
-            chems += '  <li><b>' + data[0] + '</b>: ' + (Math.round(data[1] * 1000) / 1000) + ' ' + units[data[2].trim()] + '</li>';
-        });
-        chems += '</ul>';
-        infoWindow += chems;
+        if (Array.isArray(entity.measurand)) {
+            var chems = '<p><b><i class="fa fa-fw fa-list-ul"/> Chemical agents</b>:</p><ul>';
+            entity.measurand.forEach((pollutant_text) => {
+                var data = pollutant_text.split(",");
+                chems += '  <li><b>' + data[0] + '</b>: ' + (Math.round(data[1] * 1000) / 1000) + ' ' + units[data[2].trim()] + '</li>';
+            });
+            chems += '</ul>';
+            infoWindow += chems;
+        }
         infoWindow += "</div>";
 
         return infoWindow;
