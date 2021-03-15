@@ -14,14 +14,15 @@
     "grunt-wirecloud": "^0.9.7",
     "gruntify-eslint": "^3.1.0",
     "jasmine-core": "^2.8.0",
-    "karma": "^4.1.0",
+    "karma": "^6.2.0",
     "karma-chrome-launcher": "^1.0.1",
     "karma-coverage": "^1.1.2",
     "karma-firefox-launcher": "^1.0.0",
     "karma-jasmine": "^1.0.2",
     "karma-junit-reporter": "^1.2.0",
     "mock-applicationmashup": "^1.0.0-d",
-    "wirecloud-config-parser": "^0.2.0"
+    "wirecloud-config-parser": "^0.2.3"
   },
-  "private": true
+  "private": true,
+  "name": "ngsi-datamodel2poi-operator"
 }
