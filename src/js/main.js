@@ -188,6 +188,89 @@
         return poi;
     };
 
+    var renderNightSkyQuality = function renderNightSkyQualityObserved(entity, coordinates) {
+        var icon, level, style;
+
+        if (!('skyMagnitude' in entity)) {
+            level = "unknown";
+            style = {
+                fill: "rgba(172, 172, 172, 0.1)",
+                stroke: "#acacac"
+            };
+        } else if (entity.skyMagnitude < 17.5) {
+            level = "verydeficient";
+            style = {
+                fill: "rgba(255, 0, 0, 0.3)",
+                stroke: "rgba(255, 0, 0, 0.9)"
+            };
+        } else if (entity.skyMagnitude < 18) {
+            level = "deficient";
+            style = {
+                fill: "rgba(255, 153, 0, 0.3)",
+                stroke: "rgba(255, 153, 0, 0.9)"
+            };
+        } else if (entity.skyMagnitude < 19) {
+            level = "low";
+            style = {
+                fill: "rgba(255, 255, 0, 0.3)",
+                stroke: "rgba(255, 255, 0, 0.9)"
+            };
+        } else if (entity.skyMagnitude < 20) {
+            level = "moderate";
+            style = {
+                fill: "rgba(0, 255, 0, 0.3)",
+                stroke: "rgba(0, 255, 0, 0.9)"
+            };
+        } else if (entity.skyMagnitude < 21) {
+            level = "good";
+            style = {
+                fill: "rgba(61, 133, 198, 0.3)",
+                stroke: "rgba(61, 133, 198, 0.9)"
+            };
+        } else if (entity.skyMagnitude < 21.4) {
+            level = "verygood";
+            style = {
+                fill: "rgba(28, 69, 135, 0.3)",
+                stroke: "rgba(28, 69, 135, 0.9)"
+            };
+        } else {
+            level = "excellent";
+            style = {
+                fill: "rgba(0, 0, 0, 0.3)",
+                stroke: "rgba(0, 0, 0, 0.9)"
+            };
+        }
+
+        icon = {
+            anchor: [0.5, 1],
+            scale: 0.4,
+            src: internalUrl('images/nightsky/' + level + '.png')
+        };
+
+        // Build tooltip title
+        var title = "";
+        if (entity.stationName) {
+            title = entity.stationName;
+            if (entity.stationCode) {
+                title = " (" + entity.stationCode + ")";
+            }
+        }
+
+        var poi = {
+            id: entity.id,
+            icon: icon,
+            tooltip: entity.id,
+            data: entity,
+            title: title || entity.id,
+            infoWindow: buildNightSkyQualityInfoWindow.call(this, entity),
+            currentLocation: coordinates,
+            location: entity.location,
+            style: style
+        };
+
+        return poi;
+    };
+
     var internalUrl = function internalUrl(data) {
         var url = document.createElement("a");
         url.setAttribute('href', data);
@@ -233,6 +316,30 @@
                 measures += '  <li><b>' + pollutant + '</b>: ' + (Math.round(entity[pollutant] * 100) / 100) + '</li>';
             }
         });
+        measures += '</ul>';
+        infoWindow += measures;
+        infoWindow += "</div>";
+
+        return infoWindow;
+    };
+
+    var buildNightSkyQualityInfoWindow = function buildNightSkyQualityInfoWindow(entity) {
+        var infoWindow = "<div>";
+
+        infoWindow += processAddress(entity);
+
+        var date = displayDate(entity.dateModified); // NightSkyQuality has no dateObserved
+        infoWindow += '<p><b><i class="fa fa-fw fa-clock-o"/> Date: </b> ' + date +  "</p>";
+
+        infoWindow += '<p><b><i class="fa fa-fw fa-feed"/> Source: </b> ' + entity.source +  "</p>";
+        var measures = '<p><b><i class="fa fa-fw fa-list-ul"/> Measures</b>:</p><ul>';
+
+        var quality = "<i>Unknown</i>";
+        if ('skyMagnitude' in entity) {
+            quality = entity.skyMagnitude;
+        }
+
+        measures += '  <li><b>Quality</b>: ' + quality + ' ' + "mag•arcsec⁻²" + '</li>';
         measures += '</ul>';
         infoWindow += measures;
         infoWindow += "</div>";
@@ -1617,6 +1724,7 @@
 
         // Environment
         "AirQualityObserved": renderAirQualityObserved,
+        "NightSkyQuality": renderNightSkyQuality,
         "WaterQualityObserved": renderWaterQualityObserved,
         "NoiseLevelObserved": renderNoiseLevelObserved,
 
