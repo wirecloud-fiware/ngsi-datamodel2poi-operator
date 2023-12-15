@@ -201,7 +201,7 @@
             level = "verydeficient";
             style = {
                 fill: "rgba(255, 0, 0, 0.3)",
-                stroke: "rgb(255, 0, 0, 0.9)"
+                stroke: "rgba(255, 0, 0, 0.9)"
             };
         } else if (entity.skyMagnitude < 18) {
             level = "deficient";
