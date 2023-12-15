@@ -216,7 +216,7 @@
                 stroke: "rgba(255, 255, 0, 0.9)"
             };
         } else if (entity.skyMagnitude < 20) {
-            level = "morderate";
+            level = "moderate";
             style = {
                 fill: "rgba(0, 255, 0, 0.3)",
                 stroke: "rgba(0, 255, 0, 0.9)"
@@ -234,7 +234,7 @@
                 stroke: "rgba(28, 69, 135, 0.9)"
             };
         } else {
-            level = "excelent";
+            level = "excellent";
             style = {
                 fill: "rgba(0, 0, 0, 0.3)",
                 stroke: "rgba(0, 0, 0, 0.9)"
