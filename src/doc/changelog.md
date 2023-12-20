@@ -1,4 +1,8 @@
-## v3.0.9 (2019-05-21)
+## v3.0.10 (2023-12-20)
+
+- Updates the operator to `macversion` 2.
+
+## v3.0.9 (2023-12-15)
 
 - Added support for NightSkyQuality entities.
 
