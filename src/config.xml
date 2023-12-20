@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<operator xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="ngsi-datamodel2poi" version="3.0.9">
+<operator xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="ngsi-datamodel2poi" version="3.0.10">
+  <macversion>2</macversion>
+
   <details>
     <title>FIWARE data model To PoI</title>
     <homepage>https://github.com/wirecloud-fiware/ngsi-datamodel2poi-operator</homepage>
@@ -20,6 +22,7 @@
     <inputendpoint name="entityInput" type="text" label="Entities" description="Received entities will be transform into PoIs" friendcode="entity"/>
   </wiring>
 
+  <entrypoint name="CoNWeT_NGSI_Datamodel2POI_op" />
   <scripts>
     <script src="lib/js/moment-with-locales.min.js"/>
     <script src="js/main.js"/>
