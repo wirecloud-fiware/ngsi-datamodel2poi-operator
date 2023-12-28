@@ -81,6 +81,7 @@ module.exports = function (grunt) {
                             'DESCRIPTION.md',
                             'css/**/*',
                             'doc/**/*',
+                            'lib/**/*',
                             'images/**/*.png',
                             'index.html',
                             'config.xml'
