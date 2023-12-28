@@ -1,4 +1,4 @@
-/* globals MashupPlatform, MockMP, beforeAll, afterAll, beforeEach */
+/* globals MashupPlatform, MockMP, beforeAll, afterAll, beforeEach, operator */
 
 (function () {
 
@@ -6,14 +6,14 @@
 
     describe("NGSI Datamodel To PoI operator should", function () {
 
-        var operator, abort_mock, entity_pages, entity_page_i;
-
         beforeAll(function () {
             window.MashupPlatform = new MockMP({
                 type: 'operator',
                 inputs: ['entityInput'],
                 outputs: ['poiOutput']
             });
+
+            window.operator = new CoNWeT_NGSI_Datamodel2POI_op(window.MashupPlatform, null);
         });
 
         beforeEach(function () {
@@ -22,34 +22,34 @@
 
         it("throws an Endpoint Value error if data is not valid JSON data", () => {
             expect(function () {
-                processIncomingData("{a}");
+                operator.processIncomingData("{a}");
             }).toThrowError(MashupPlatform.wiring.EndpointTypeError);
         });
 
         it("throws an Endpoint Type error if data is not a JSON object", () => {
             expect(function () {
-                processIncomingData("5");
+                operator.processIncomingData("5");
             }).toThrowError(MashupPlatform.wiring.EndpointTypeError);
         });
 
         it("throws an Endpoint Type error if data is not an object", () => {
             expect(function () {
-                processIncomingData(5);
+                operator.processIncomingData(5);
             }).toThrowError(MashupPlatform.wiring.EndpointTypeError);
         });
 
         it("process empty lists", () => {
-            processIncomingData([]);
+            operator.processIncomingData([]);
             expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', []);
         });
 
         it("ignores entities without location", () => {
-            processIncomingData([{"id": "1", "type": "OffStreetParking"}]);
+            operator.processIncomingData([{"id": "1", "type": "OffStreetParking"}]);
             expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', []);
         });
 
         it("ignores entities using an unmanaged type", () => {
-            processIncomingData([{
+            operator.processIncomingData([{
                 "id": "1",
                 "type": "MyType",
                 "location": {
@@ -77,7 +77,7 @@
                 "alertSource": "https://account.lab.fiware.org/users/8"
             };
 
-            processIncomingData([entity]);
+            operator.processIncomingData([entity]);
             expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
                 "id": "1",
                 "icon": jasmine.anything(),
@@ -115,7 +115,7 @@
                 "severity" : "informational"
             };
 
-            processIncomingData([entity]);
+            operator.processIncomingData([entity]);
         });
 
         it("minimal AirQualityObserved", () => {
@@ -136,7 +136,7 @@
                 "CO": 500
             };
 
-            processIncomingData([entity]);
+            operator.processIncomingData([entity]);
             expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
                 "id": "1",
                 "icon": jasmine.anything(),
@@ -166,7 +166,7 @@
                 "occupancyDetectionType": ["none"]
             };
 
-            processIncomingData([entity]);
+            operator.processIncomingData([entity]);
             expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
                 "id": "1",
                 "icon": jasmine.anything(),
@@ -205,7 +205,7 @@
                 "occupancyDetectionType": ["none"]
             };
 
-            processIncomingData([entity]);
+            operator.processIncomingData([entity]);
         });
 
         describe("process Vehicle entities", () => {
@@ -232,7 +232,7 @@
 
                     entity[idattr] = idvalue;
 
-                    processIncomingData([entity]);
+                    operator.processIncomingData([entity]);
                     expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
                         "id": "vehicle:WasteManagement:1",
                         "icon": jasmine.anything(),
@@ -262,7 +262,7 @@
                     "vehiclePlateIdentifier": "3456ABC"
                 };
 
-                processIncomingData([entity]);
+                operator.processIncomingData([entity]);
                 expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
                     "id": "vehicle:WasteManagement:1",
                     "icon": jasmine.anything(),
@@ -309,7 +309,7 @@
                         delete entity[attr];
                     });
 
-                    processIncomingData([entity]);
+                    operator.processIncomingData([entity]);
                     expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', [{
                         "id": "malaga-bici-7",
                         "icon": jasmine.anything(),
@@ -337,7 +337,7 @@
                     }
                 };
 
-                processIncomingData([entity]);
+                operator.processIncomingData([entity]);
                 expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalledWith('poiOutput', jasmine.any(Array));
 
                 var poi = MashupPlatform.wiring.pushEvent.calls.argsFor(0)[1][0];
